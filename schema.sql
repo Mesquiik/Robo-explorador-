@@ -1,0 +1,1 @@
+-- Tabela de leituras do robo explorador 
