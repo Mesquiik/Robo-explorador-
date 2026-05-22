@@ -1,19 +1,18 @@
 
-
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <DHT.h>
 #include <ESP32Servo.h>
 
 
-const char* SSID         = "SEU_WIFI";
-const char* WIFI_PASS    = "SUA_SENHA";
+const char* SSID         = "João's Galaxy S25 Ultra";
+const char* WIFI_PASS    = "gggggggg";
 
-const char* BACKEND_URL  = "http://192.168.0.100:5000/leituras";
+const char* BACKEND_URL  = "http://10.204.255.73:5000/leituras";
 
 
-const char* WHATSAPP_NUM = "55SEU_NUMERO";   
-const char* CALLMEBOT_KEY = "SUA_APIKEY";
+const char* WHATSAPP_NUM = "5574999250011";   
+const char* CALLMEBOT_KEY = "3940309";
 
 
 #define DHTPIN         4      
@@ -43,7 +42,7 @@ Servo servoDir;
 
 bool roboLigado = true;
 unsigned long ultimoEnvio = 0;
-const unsigned long INTERVALO = 2000; // 2 segundos
+const unsigned long INTERVALO = 2000; 
 
 
 void setup() {
@@ -98,22 +97,23 @@ void loop() {
 
 
 void lerESalvar() {
-  // Leituras
   float temperatura = dht.readTemperature();
   float umidade     = dht.readHumidity();
-  int   luminosidade = analogRead(LDR_PIN);
+  int   luminosidade = analogRead(LDR_PIN); 
   bool  presenca    = digitalRead(PIR_PIN);
 
-  // Valida DHT
+  bool dhtDisponivel = true;
   if (isnan(temperatura) || isnan(umidade)) {
-    Serial.println("[ERRO] DHT22 não respondeu. Pulando ciclo.");
-    return;
+    Serial.println("[AVISO/ERRO] Mau funcionamento detectado no componente DHT22! Dados de Clima indisponíveis.");
+    dhtDisponivel = false;
+    temperatura = 0.0; 
+    umidade = 0.0;     
   }
 
+ 
+  int prob = calcularProbabilidade(temperatura, umidade, luminosidade, presenca, dhtDisponivel);
 
-  int prob = calcularProbabilidade(temperatura, umidade, luminosidade, presenca);
 
-  // Estado do robô
   String estado;
   if (!roboLigado)        estado = "desligado";
   else if (prob > ALERTA_LIMITE) estado = "alerta";
@@ -121,8 +121,14 @@ void lerESalvar() {
 
 
   Serial.println("----------------------------------");
-  Serial.printf("Temperatura : %.1f °C\n", temperatura);
-  Serial.printf("Umidade     : %.1f %%\n", umidade);
+
+  if (dhtDisponivel) {
+    Serial.printf("Temperatura: %.1f °C\n", temperatura);
+    Serial.printf("Umidade: %.1f %%\n", umidade);
+  } else {
+    Serial.println("Temperatura: [FALHA NO COMPONENTE]");
+    Serial.println("Umidade: [FALHA NO COMPONENTE]");
+  }
   Serial.printf("Luminosidade: %d\n", luminosidade);
   Serial.printf("Presença    : %s\n", presenca ? "Detectada" : "Sem presença");
   Serial.printf("Estado      : %s\n", estado.c_str());
@@ -142,14 +148,17 @@ void lerESalvar() {
     }
   }
 
-
   enviarBackend(temperatura, umidade, luminosidade, presenca, (float)prob);
 }
 
-int calcularProbabilidade(float temp, float umid, int luz, bool presenca) {
+int calcularProbabilidade(float temp, float umid, int luz, bool presenca, bool dhtDisponivel) {
+
   int prob = 0;
-  if (temp >= 15.0 && temp <= 30.0)  prob += 25;
-  if (umid >= 40.0 && umid <= 70.0)  prob += 25;
+
+  if (dhtDisponivel) {
+    if (temp >= 15.0 && temp <= 30.0)  prob += 25;
+    if (umid >= 40.0 && umid <= 70.0)  prob += 25;
+  }
   if (luz > LUZ_LIMITE)              prob += 20;
   if (presenca)                       prob += 30;
   return prob;
@@ -167,28 +176,24 @@ void controlarMotores() {
 
 
   if (y < centroMin) {
-
     int vel = map(y, centroMin, 0, 0, 45);
     velEsq = 90 + vel;
-    velDir = 90 - vel;
+    velDir = 90 + vel;
   } else if (y > centroMax) {
-  
     int vel = map(y, centroMax, 4095, 0, 45);
     velEsq = 90 - vel;
-    velDir = 90 + vel;
+    velDir = 90 - vel;
   }
 
   
-  if (x < centroMin) {]
-
+  if (x < centroMin) {
     int delta = map(x, centroMin, 0, 0, 30);
     velEsq -= delta;
-    velDir += delta;
+    velDir -= delta;
   } else if (x > centroMax) {
-
     int delta = map(x, centroMax, 4095, 0, 30);
     velEsq += delta;
-    velDir -= delta;
+    velDir += delta;
   }
 
   velEsq = constrain(velEsq, 45, 135);
@@ -233,7 +238,6 @@ void enviarBackend(float temp, float umid, int luz, bool presenca, float prob) {
 
 void enviarWhatsApp(String mensagem) {
   if (WiFi.status() != WL_CONNECTED) return;
-
 
   mensagem.replace(" ", "%20");
 
