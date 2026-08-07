@@ -89,7 +89,7 @@ Pressionar o botão do joystick desliga/liga o robô remotamente.
 
 ---
 
-## 🖥️ Como Rodar o Backend Python
+##  Como Rodar o Backend Python
 
 ### Pré-requisitos
 - Python 3.x instalado ([python.org](https://www.python.org/downloads/))
@@ -178,7 +178,7 @@ SELECT COUNT(*) FROM leituras;
 
 ---
 
-## 📲 Configurar Alertas via WhatsApp (CallmeBot)
+##  Configurar Alertas via WhatsApp (CallmeBot)
 
 1. Adicione o número **+34 644 78 33 97** aos contatos do WhatsApp
 2. Envie a mensagem: `I allow callmebot to send me messages`
