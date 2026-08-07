@@ -1,4 +1,4 @@
-# 🤖 Robô Explorador — ESP32 + Python + SQLite
+#  Robô Explorador — ESP32 + Python + SQLite
 
 > Projeto acadêmico de um robô explorador autônomo capaz de detectar condições ambientais,
 > calcular a probabilidade de existência de vida, emitir alertas via WhatsApp e armazenar
@@ -6,7 +6,7 @@
 
 ---
 
-## 📖 Sobre o Projeto
+##  Sobre o Projeto
 
 O **Robô Explorador** é um sistema embarcado desenvolvido com o microcontrolador **ESP32 WROVER**,
 projetado para simular uma missão de exploração planetária. O robô coleta dados do ambiente
@@ -22,7 +22,7 @@ onde são armazenados em um banco de dados SQLite e exibidos em um dashboard web
 
 ---
 
-## 🧰 Hardware Utilizado
+## Hardware Utilizado
 
 | Componente              | Função                                                   |
 |-------------------------|----------------------------------------------------------|
@@ -38,7 +38,7 @@ onde são armazenados em um banco de dados SQLite e exibidos em um dashboard web
 
 ---
 
-## 🗺️ Mapeamento de Pinos — ESP32 WROVER
+##  Mapeamento de Pinos — ESP32 WROVER
 
 | Componente      | Pino GPIO | Observação                          |
 |-----------------|-----------|-------------------------------------|
@@ -53,7 +53,7 @@ onde são armazenados em um banco de dados SQLite e exibidos em um dashboard web
 | Joystick Eixo Y | 32        | ADC somente leitura                 |
 | Joystick Botão  | 33        | INPUT_PULLUP — pressionar desliga o robô |
 
-> ⚠️ Os pinos 6–11 e 16–17 do ESP32 WROVER são reservados para flash e PSRAM internos.
+>  Os pinos 6–11 e 16–17 do ESP32 WROVER são reservados para flash e PSRAM internos.
 > Nunca os utilize para periféricos externos.
 
 ---
@@ -89,7 +89,7 @@ Pressionar o botão do joystick desliga/liga o robô remotamente.
 
 ---
 
-## 🖥️ Como Rodar o Backend Python
+##  Como Rodar o Backend Python
 
 ### Pré-requisitos
 - Python 3.x instalado ([python.org](https://www.python.org/downloads/))
@@ -178,7 +178,7 @@ SELECT COUNT(*) FROM leituras;
 
 ---
 
-## 📲 Configurar Alertas via WhatsApp (CallmeBot)
+##  Configurar Alertas via WhatsApp (CallmeBot)
 
 1. Adicione o número **+34 644 78 33 97** aos contatos do WhatsApp
 2. Envie a mensagem: `I allow callmebot to send me messages`
@@ -187,7 +187,7 @@ SELECT COUNT(*) FROM leituras;
 
 ---
 
-## 🔧 Configuração do Firmware
+##  Configuração do Firmware
 
 Antes de gravar o firmware no ESP32, edite as seguintes linhas no topo do arquivo `firmware_robo.ino`:
 
@@ -218,7 +218,7 @@ Instale via `Sketch → Include Library → Manage Libraries`:
 
 ---
 
-## 📁 Estrutura do Repositório
+##  Estrutura do Repositório
 
 ```
 robo-explorador/
@@ -230,7 +230,7 @@ robo-explorador/
 
 ---
 
-## 👩‍💻 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **C++ / Arduino Core** — Firmware do ESP32
 - **Python 3 + Flask** — Backend e API REST
@@ -240,7 +240,7 @@ robo-explorador/
 
 ---
 
-## 📚 Disciplina
+##  Disciplina
 
 Projeto desenvolvido para a disciplina de **Sistemas Embarcados / IoT**
 como parte do curso de Engenharia de Computação.
