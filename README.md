@@ -1,4 +1,4 @@
-# 🤖 Robô Explorador — ESP32 + Python + SQLite
+# Robô Explorador — ESP32 + Python + SQLite
 
 > Projeto acadêmico de um robô explorador autônomo capaz de detectar condições ambientais,
 > calcular a probabilidade de existência de vida, emitir alertas via WhatsApp e armazenar
@@ -6,7 +6,7 @@
 
 ---
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 O **Robô Explorador** é um sistema embarcado desenvolvido com o microcontrolador **ESP32 WROVER**,
 projetado para simular uma missão de exploração planetária. O robô coleta dados do ambiente
@@ -22,7 +22,7 @@ onde são armazenados em um banco de dados SQLite e exibidos em um dashboard web
 
 ---
 
-## 🧰 Hardware Utilizado
+##  Hardware Utilizado
 
 | Componente              | Função                                                   |
 |-------------------------|----------------------------------------------------------|
@@ -38,7 +38,7 @@ onde são armazenados em um banco de dados SQLite e exibidos em um dashboard web
 
 ---
 
-## 🗺️ Mapeamento de Pinos — ESP32 WROVER
+##  Mapeamento de Pinos — ESP32 WROVER
 
 | Componente      | Pino GPIO | Observação                          |
 |-----------------|-----------|-------------------------------------|
@@ -53,12 +53,12 @@ onde são armazenados em um banco de dados SQLite e exibidos em um dashboard web
 | Joystick Eixo Y | 32        | ADC somente leitura                 |
 | Joystick Botão  | 33        | INPUT_PULLUP — pressionar desliga o robô |
 
-> ⚠️ Os pinos 6–11 e 16–17 do ESP32 WROVER são reservados para flash e PSRAM internos.
+>  Os pinos 6–11 e 16–17 do ESP32 WROVER são reservados para flash e PSRAM internos.
 > Nunca os utilize para periféricos externos.
 
 ---
 
-## ⚙️ Como Funciona
+##  Como Funciona?
 
 ### Coleta de Dados
 A cada 2 segundos, o ESP32 lê todos os sensores e exibe os valores no Monitor Serial:
@@ -133,7 +133,7 @@ a cada 5 segundos. Leituras com probabilidade de vida acima de 75% são destacad
 
 ---
 
-## 🗄️ Banco de Dados
+##  Banco de Dados
 
 O banco de dados é um arquivo SQLite (`robo_explorador.db`) criado automaticamente
 na mesma pasta do `backend.py` quando o servidor é iniciado pela primeira vez.
@@ -218,7 +218,7 @@ Instale via `Sketch → Include Library → Manage Libraries`:
 
 ---
 
-## 📁 Estrutura do Repositório
+##  Estrutura do Repositório
 
 ```
 robo-explorador/
@@ -230,7 +230,7 @@ robo-explorador/
 
 ---
 
-## 👩‍💻 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **C++ / Arduino Core** — Firmware do ESP32
 - **Python 3 + Flask** — Backend e API REST
@@ -240,7 +240,7 @@ robo-explorador/
 
 ---
 
-## 📚 Disciplina
+## Disciplina
 
 Projeto desenvolvido para a disciplina de **Sistemas Embarcados / IoT**
 como parte do curso de Engenharia de Computação.
